@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+{% if not blog_list %}
+<article>
+  <h5>No posts yet, come back later!</h5>
+</article>
+{% endif %}
+
+{% for post in blog_list %}
+<article>
+  <header>
+    <h2><a href="{% url 'post' post.slug %}">{{ post.title }}</a></h2>
+    <p>Published {{ post.pub_date }}</p>
+  </header>
+  {{ post.body|truncatewords:30|linebreaks }}
+</article>
+{% endfor %}
+
+{% endblock %}
